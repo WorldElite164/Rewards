@@ -1,0 +1,66 @@
+<style> font {size: -webkit-text-size-Adjust: нет; } body {background-color: rgb (0, 0, 0); размер шрифта: -webkit-текст-размер-настроить: нет; } p {font-family: "Calibri", Courier, monospace; } td {font-family: "Calibri", Courier, monospace; размер шрифта: -webkit-текст-размер-настроить: нет; } .messages td {padding-right: 15px; } </ style> <script> function update () {// Получить текущее время var time = new Date (); var hours = time.getUTCHours (); var minutes = time.getUTCMinutes (); var seconds = time.getUTCSeconds (); {var memberList = document.getElementById ('memberList'); var numberOfMembers = memberList.rows.length; // Вычисляем смещение {// Текущее время в секундах var utcInSeconds = (часы * 60 * 60) + (минуты * 60) + секунды; // час вознаграждения в 21: 00 местное время var rewardHourInSeconds = 21 * 60 * 60; var dayInSeconds = 24 * 60 * 60; for (i = 0; i <numberOfMembers; i ++) {var currentMember = memberList.rows.item (i) .cells; // Разбиваем часовой пояс на часы и минуты var timezone = currentMember.item (0) .innerHTML.split (":"); var timezoneHours = parseInt (часовой пояс [0]); var timezoneMinutes = parseInt (timezone [1]); // Преобразование часового пояса в секунды var timezoneInSeconds = (timezoneHours * 60 * 60) + (timezoneMinutes * 60); // Рассчитать местное время var localTimeInSeconds = utcInSeconds + timezoneInSeconds; if (localTimeInSeconds> dayInSeconds) {localTimeInSeconds = localTimeInSeconds - dayInSeconds; } else if (localTimeInSeconds <0) {localTimeInSeconds = dayInSeconds + localTimeInSeconds; } // Рассчитать оставшееся время до следующего вознаграждения if (localTimeInSeconds <rewardHourInSeconds) {secondsTillReward = rewardHourInSeconds - localTimeInSeconds; } else {secondsTillReward = (dayInSeconds - localTimeInSeconds) + rewardHourInSeconds; } var hourCount = Math.floor ((secondsTillReward / 60) / 60); var minuteCount = Math.floor ((secondsTillReward - (hourCount * 60 * 60)) / 60); var secondCount = secondsTillReward - ((hourCount * 60 * 60) + (minuteCount * 60)); // Отображение времени до наград currentMember.item (4) .innerHTML = hourCount + ":" + checkTime (minuteCount) + ":" + checkTime (secondCount); }} // Устанавливаем правильные цвета в ячейки {for (i = 0; i <numberOfMembers; i ++) {var thisCell = memberList.rows.item (i). клетки; var thisResult = thisCell.item (4) .innerHTML.split (":"); if (parseInt (thisResult [0]) == 0 || (parseInt (thisResult [0]) == 23 && parseInt (thisResult [1])> 57)) {applyColor (thisCell, "red"); } else if (parseInt (thisResult [0]) == 1) {applyColor (thisCell, "orange"); } else if (parseInt (thisResult [0]) == 2) {applyColor (thisCell, "yellow"); } else if (parseInt (thisResult [0]) == 23 || parseInt (thisResult [0]) == 22) {applyColor (thisCell, "greenyellow"); } else {applyColor (thisCell, "white"); }}} // Сортировка ячеек по времени {var done = false; while (done == false) {done = true; для (i = 0; i <numberOfMembers - 1; i ++) {var firstCell = memberList.rows.item (i) .cells; var secondCell = memberList.rows.item (i + 1) .cells; var firstValues ​​= firstCell.item (4) .innerHTML.split (":"); var secondValues ​​= secondCell.item (4) .innerHTML.split (":"); var firstHour = parseInt (firstValues ​​[0]); var secondHour = parseInt (secondValues ​​[0]); if (firstHour> = 22) {firstHour = firstHour - 24; } if (secondHour> = 22) {secondHour = secondHour - 24; } if (firstHour> secondHour || (parseInt (firstValues ​​[0]) == parseInt (secondValues ​​[0]) && parseInt (firstValues ​​[1])> parseInt (secondValues ​​[1]))) {var tempTime = firstCell.item (0) .innerHTML; var tempArena = firstCell.item (1) .innerHTML; var tempGuild = firstCell. пункт (2) .innerHTML; var tempName = firstCell.item (3) .innerHTML; var tempOffset = firstCell.item (4) .innerHTML; firstCell.item (0) .innerHTML = secondCell.item (0) .innerHTML; firstCell.item (1) .innerHTML = secondCell.item (1) .innerHTML; firstCell.item (2) .innerHTML = secondCell.item (2) .innerHTML; firstCell.item (3) .innerHTML = secondCell.item (3) .innerHTML; firstCell.item (4) .innerHTML = secondCell.item (4) .innerHTML; secondCell.item (0) .innerHTML = tempTime; secondCell.item (1) .innerHTML = tempArena; secondCell.item (2) .innerHTML = tempGuild; secondCell.item (3) .innerHTML = tempName; secondCell.item (4) .innerHTML = tempOffset; готово = ложно; }}}}} {minutes = checkTime (minutes); seconds = checkTime (секунды); документ. getElementById ('txt'). innerHTML = "GMT:" + часы + ":" + минуты + ":" + секунды; document.getElementById ('txt'). style.color = "white"; } var t = setTimeout (update, 500); } function checkTime (i) {if (i <10) {i = "0" + i}; // добавляем ноль перед числами <10 return i; } function applyColor (cell, color) {cell.item (0) .style.color = color; cell.item (1) .style.color = color; cell.item (2) .style.color = color; cell.item (3) .style.color = color; cell.item (4) .style.color = color; } </ script> } function checkTime (i) {if (i <10) {i = "0" + i}; // добавляем ноль перед числами <10 return i; } function applyColor (cell, color) {cell.item (0) .style.color = color; cell.item (1) .style.color = color; cell.item (2) .style.color = color; cell.item (3) .style.color = color; cell.item (4) .style.color = color; } </ script> } function checkTime (i) {if (i <10) {i = "0" + i}; // добавляем ноль перед числами <10 return i; } function applyColor (cell, color) {cell.item (0) .style.color = color; cell.item (1) .style.color = color; cell.item (2) .style.color = color; cell.item (3) .style.color = color; cell.item (4) .style.color = color; } </ script>
+WorldElite Reward Times (по Гринвичу)
+Готово	Собранные награды, может понизить мощность, если спросить
+готово	награда получена, ослабь по возможности
+критический	Собирая награды, НЕ НАПАДАЙТЕ!
+критично	получает награды, не нападать!
+Альпинизм	Атакуйте ТОЛЬКО при необходимости
+подъём	нападать только при необходимости
+ждущий	Безопасно для атаки, избегайте, если возможно
+в ожидании	нападать можно, но если возможно - обойди
+Неактивный	Сейф для атаки
+неактивный	нападать можно
+A = Арена	В первую очередь собирать награды с Арены
+А = арена	-сбор наград в основном на арене
+GA = Гранд Арена	В первую очередь собирать награды с Гранд Арены
+ГА = Гранд арена	-Сбор наград в основном на гранд арене
+3:00	KARLOS	
+8:00	Royce	
+8:00	Супер муха	
+8:00	Paciu	
+11:00	икса	
+13:00	Бу	
+13:00	AR1F	
+13:30	Gerda	
+14:00	Hapiness	
+14:00	Mastermax	
+14:30	Tuman	
+16:00	KALIJOGO	
+17:00	НЕТ ОГРАНИЧЕНИЙ	
+17:00	prime1	
+17:00	Lusiana	
+17:00	JumperJack	
+17:00	DEVIL	
+17:30	Жизненно важный	
+18:00	Полярный медведь	
+18:15	Zavanna	
+18:30	Ultras1922	
+19:00	Kozяvoчka	
+19:00	AraKul	
+19:00	ЮРИЙ + 5	
+19:00	Zeddi	
+19:00	Лука	
+19:00	Wildfire	
+19:00	DvsL	
+19:30	ФОБОС	
+20:00	Pitorion	
+20:00	Лакомка	
+20:00	Furiya	
+20:00	Sellex	
+20:00	Люцифер	
+21:00	Митяй	
+21:00	Atos	
+21:00	$ uicideSquad	
+21:00	Urri	
+21:00	SemplSany	
+22:00	дуэлянт	
+22:00	буги-вуги	
+23:00	сковорода с длинной ручкой	
+23:00	Jeka	
+23:00	Сидр	
+23:00	Нина	
+0:00	MegaBaton	
+0:00	KONNANWAR	
+?	166TA	
+?	Мукам	
+?	KmciL		?	ZerGhoSt	
